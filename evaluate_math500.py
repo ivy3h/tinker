@@ -20,19 +20,34 @@ import os
 
 # ==================== 配置 ====================
 # 模型路径（训练时输出的 tinker:// 路径）
+<<<<<<< HEAD
 MODEL_PATH = "tinker://<your-model-id>/sampler_weights/final"
+=======
+MODEL_PATH = "tinker://f0340c70-1f22-4a72-8e46-fc48b2965178/sampler_weights/s1k_test-20251107-124036"
+>>>>>>> e64db62 (update MATH500_EVALUATION)
 
 # 基础模型（必须与训练时使用的相同）
 BASE_MODEL = "Qwen/Qwen3-4B-Instruct-2507"
 
 # 采样参数
+<<<<<<< HEAD
 MAX_TOKENS = 32768  # 数学问题可能需要长推理
 TEMPERATURE = 0.0  # 贪婪解码，获得确定性输出
 
+=======
+MAX_TOKENS = 16384  # 数学问题可能需要长推理
+TEMPERATURE = 0.0  # 贪婪解码，获得确定性输出
+
+# 是否保存详细结果
+>>>>>>> e64db62 (update MATH500_EVALUATION)
 SAVE_DETAILED_RESULTS = True
 model_name = BASE_MODEL.split("/")[-1]
 save_dir = os.path.join("evaluation_results", model_name)
 os.makedirs(save_dir, exist_ok=True)
+<<<<<<< HEAD
+=======
+
+>>>>>>> e64db62 (update MATH500_EVALUATION)
 OUTPUT_FILE = os.path.join(save_dir, f"{model_name}_{DATASET_NAME}.json")
 # ==============================================
 
