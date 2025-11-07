@@ -1,6 +1,6 @@
 # Tinker Fine-tuning Configuration
 
-MAX_SEQUENCE_LENGTH = 16384  # ← 关键！设置为最大值
+MAX_SEQUENCE_LENGTH = 32768  # ← 关键！设置为最大值
 TRUNCATE_LONG_SEQUENCES = True  # 自动截断超长部分
 SHOW_LENGTH_WARNINGS = True  # 显示统计信息
 
@@ -34,7 +34,7 @@ NUM_EPOCHS = 5  # 训练轮数
 
 # ==================== 采样配置 ====================
 # 测试时的采样参数
-SAMPLING_MAX_TOKENS = 32768  # 生成的最大 token 数
+SAMPLING_MAX_TOKENS = 16384  # 生成的最大 token 数
 SAMPLING_TEMPERATURE = 0.7  # 温度，0-1 之间，越高越随机
 SAMPLING_NUM_SAMPLES = 3  # 生成的样本数量
 
