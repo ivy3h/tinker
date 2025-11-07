@@ -7,8 +7,8 @@ SHOW_LENGTH_WARNINGS = True
 MODEL_NAME_PREFIX = "s1k"
 
 DATA_FILES = [
-    "data/s1k.json",
-    # "s2k.json",       
+    #"data/s1k.json",
+    "data/ms1k_all_languages.json",       
     # "s3k.json",
     # "other_data.json",
 ]
