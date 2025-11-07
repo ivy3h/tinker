@@ -1,6 +1,6 @@
 # Tinker Fine-tuning Configuration
 
-MAX_SEQUENCE_LENGTH = 32768  # ← 关键！设置为最大值
+MAX_SEQUENCE_LENGTH = 16384  # ← 关键！设置为最大值
 TRUNCATE_LONG_SEQUENCES = True  # 自动截断超长部分
 SHOW_LENGTH_WARNINGS = True  # 显示统计信息
 
