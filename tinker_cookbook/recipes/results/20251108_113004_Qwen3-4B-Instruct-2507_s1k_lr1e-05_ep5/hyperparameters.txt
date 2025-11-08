@@ -1,0 +1,13 @@
+Training Hyperparameters
+============================================================
+
+Model:           Qwen/Qwen3-4B-Instruct-2507
+Dataset:         /srv/nlprx-lab/share6/jhe478/tinker-cookbook/data/s1k.jsonl
+Learning rate:   1e-05
+LR schedule:     cosine
+Num epochs:      5
+Batch size:      16
+Max length:      32768
+Adam beta1:      0.9
+Adam beta2:      0.95
+Eval every:      8

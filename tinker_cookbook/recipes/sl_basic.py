@@ -41,7 +41,7 @@ def create_output_dir(model_name: str, dataset_name: str, config: dict) -> str:
 
 
 def build_config_blueprint() -> chz.Blueprint[train.Config]:
-    model_name = "Qwen/Qwen3-4B-Instruct-2507"
+    model_name = "Qwen/Qwen3-8B-Base"
     dataset_path = "/srv/nlprx-lab/share6/jhe478/tinker-cookbook/data/s1k.jsonl"
     
     renderer_name = model_info.get_recommended_renderer_name(model_name)
@@ -106,6 +106,7 @@ def main(config: train.Config, hyperparams: dict, dataset_path: str):
         f.write(f"Max length:      {hyperparams['dataset_builder'].common_config.max_length}\n")
         f.write(f"Adam beta1:      {hyperparams['adam_beta1']}\n")
         f.write(f"Adam beta2:      {hyperparams['adam_beta2']}\n")
+        f.write(f"Weight decay:      {hyperparams['weight_decay']}\n")
         f.write(f"Eval every:      {hyperparams['eval_every']}\n")
     
     print(f"Hyperparameters saved to: {hyperparam_file}")

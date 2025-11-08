@@ -1,0 +1,27 @@
+============================================================
+TRAINING REPORT
+============================================================
+
+Loss Statistics:
+  Initial loss:     0.6690
+  Final loss:       0.3582
+  Minimum loss:     0.2630
+  Loss reduction:   0.3108
+
+Training Time:
+  Total time:       1525.07 seconds (25.42 minutes)
+  Avg step time:    1.45 seconds
+
+Data Statistics:
+  Total steps:      310
+  Total tokens:     27,948,469
+  Total epochs:     5
+
+Per-Epoch Statistics:
+         mean     min     max  count
+epoch                               
+0      0.5287  0.3174  0.7761     62
+1      0.3695  0.3002  0.5100     62
+2      0.3418  0.2695  0.4487     62
+3      0.3337  0.2630  0.4509     62
+4      0.3326  0.2779  0.4513     62
