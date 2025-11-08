@@ -6,23 +6,19 @@ import json
 from typing import Dict, List
 import os
 
-# ==================== 配置 ====================
-# 模型路径（训练时输出的 tinker:// 路径）
-MODEL_PATH = "tinker://f0340c70-1f22-4a72-8e46-fc48b2965178/sampler_weights/s1k_test-20251107-124036"
+MODEL_PATH = "tinker://a16e6b59-9c3a-4e95-88cd-afb3a77f0cbb/sampler_weights/s1k_1.1-20251107-141719"
 
-# 基础模型（必须与训练时使用的相同）
-BASE_MODEL = "Qwen/Qwen3-4B-Instruct-2507"
+BASE_MODEL = "Qwen/Qwen3-8B-Base"
 
 
-MAX_TOKENS = 16384  # 数学问题可能需要长推理
-TEMPERATURE = 0.0  # 贪婪解码，获得确定性输出
+MAX_TOKENS = 16384
+TEMPERATURE = 0.0
 
 SAVE_DETAILED_RESULTS = True
 model_name = BASE_MODEL.split("/")[-1]
 save_dir = os.path.join("evaluation_results", model_name)
 os.makedirs(save_dir, exist_ok=True)
-OUTPUT_FILE = os.path.join(save_dir, f"{model_name}_{DATASET_NAME}.json")
-# ==============================================
+OUTPUT_FILE = os.path.join(save_dir, f"{model_name}_MATH500.json")
 
 def normalize_answer(answer: str) -> str:
     """

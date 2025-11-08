@@ -1,14 +1,15 @@
 # Tinker Fine-tuning Configuration
 
-MAX_SEQUENCE_LENGTH = 32768
-TRUNCATE_LONG_SEQUENCES = True
+MAX_SEQUENCE_LENGTH = 16384
+TRUNCATE_LONG_SEQUENCES = False
 SHOW_LENGTH_WARNINGS = True
 
-MODEL_NAME_PREFIX = "s1k"
+MODEL_NAME_PREFIX = "s1k_1.1"
 
 DATA_FILES = [
     #"data/s1k.json",
-    "data/ms1k_all_languages.json",       
+    #"data/ms1k_all_languages.json",       
+    "data/s1k_1.1_best.json",       
     # "s3k.json",
     # "other_data.json",
 ]
