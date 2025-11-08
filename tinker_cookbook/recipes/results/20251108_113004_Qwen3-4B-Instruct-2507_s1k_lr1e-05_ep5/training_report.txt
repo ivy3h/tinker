@@ -19,7 +19,7 @@ Data Statistics:
 
 Per-Epoch Statistics:
          mean     min     max  count
-epoch                               
+epoch
 0      0.5287  0.3174  0.7761     62
 1      0.3695  0.3002  0.5100     62
 2      0.3418  0.2695  0.4487     62

@@ -161,7 +161,7 @@ MAX_SEQUENCE_LENGTH = 16384  # 支持长推理链
 ```python
 # 只评估前 50 个问题（快速测试）
 results = evaluate_on_math500(
-    sampling_client, 
+    sampling_client,
     tokenizer,
     max_samples=50
 )

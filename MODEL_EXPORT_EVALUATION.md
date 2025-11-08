@@ -128,24 +128,24 @@ Tinker 提供了评估工具，特别是与 InspectAI 的集成。
 for epoch in range(num_epochs):
     # 训练步骤
     fwdbwd_future = training_client.forward_backward(
-        processed_examples, 
+        processed_examples,
         "cross_entropy"
     )
     optim_future = training_client.optim_step(
         types.AdamParams(learning_rate=learning_rate)
     )
-    
+
     # 计算训练损失
     fwdbwd_result = fwdbwd_future.result()
     # ... 计算损失 ...
-    
+
     # 每 N 个 epoch 评估一次
     if epoch % 5 == 0:
         # 保存检查点并评估
         eval_sampling_client = training_client.save_weights_and_get_sampling_client(
             name=f'checkpoint-epoch-{epoch}'
         )
-        
+
         # 在验证集上评估
         eval_results = evaluate_model(eval_sampling_client, validation_data)
         print(f"Epoch {epoch} - Validation accuracy: {eval_results['accuracy']}")
@@ -157,54 +157,54 @@ for epoch in range(num_epochs):
 def evaluate_model(sampling_client, test_data, tokenizer):
     """
     评估模型性能
-    
+
     Args:
         sampling_client: Tinker sampling client
         test_data: 测试数据列表
         tokenizer: tokenizer 对象
-    
+
     Returns:
         评估指标字典
     """
     correct = 0
     total = 0
-    
+
     for example in test_data:
         # 构建 prompt
         instruction = example.get("instruction", "")
         input_text = example.get("input", "")
         expected_output = example.get("output", "")
-        
+
         if input_text:
             prompt_text = f"Instruction: {instruction}\nInput: {input_text}\nResponse:"
         else:
             prompt_text = f"Instruction: {instruction}\nResponse:"
-        
+
         # 生成预测
         prompt_tokens = tokenizer.encode(prompt_text)
         prompt = types.ModelInput.from_ints(prompt_tokens)
-        
+
         params = types.SamplingParams(
             max_tokens=512,
             temperature=0.0,  # 使用贪婪解码获得确定性输出
             stop=["\n\n", "Instruction:"]
         )
-        
+
         future = sampling_client.sample(
             prompt=prompt,
             sampling_params=params,
             num_samples=1
         )
         result = future.result()
-        
+
         # 获取模型输出
         model_output = tokenizer.decode(result.sequences[0].tokens).strip()
-        
+
         # 评估（根据任务类型自定义）
         if check_answer(model_output, expected_output):
             correct += 1
         total += 1
-    
+
     accuracy = correct / total if total > 0 else 0
     return {
         "accuracy": accuracy,
@@ -271,7 +271,7 @@ print(f"GSM8K Score: {results['score']:.2f}%")
 def evaluate_math_reasoning(sampling_client, test_data, tokenizer):
     """
     评估数学推理任务
-    
+
     评估指标：
     - 最终答案正确率
     - 推理步骤质量
@@ -283,21 +283,21 @@ def evaluate_math_reasoning(sampling_client, test_data, tokenizer):
         'complete_proof': 0,
         'total': 0
     }
-    
+
     for example in test_data:
         instruction = example.get("instruction", "")
         expected_output = example.get("output", "")
-        
+
         # 生成模型输出
         prompt_text = f"Instruction: {instruction}\nResponse:"
         prompt_tokens = tokenizer.encode(prompt_text)
         prompt = types.ModelInput.from_ints(prompt_tokens)
-        
+
         params = types.SamplingParams(
             max_tokens=2048,  # 数学推理需要较长输出
             temperature=0.0
         )
-        
+
         future = sampling_client.sample(
             prompt=prompt,
             sampling_params=params,
@@ -305,19 +305,19 @@ def evaluate_math_reasoning(sampling_client, test_data, tokenizer):
         )
         result = future.result()
         model_output = tokenizer.decode(result.sequences[0].tokens)
-        
+
         # 评估不同方面
         if check_final_answer(model_output, expected_output):
             results['correct_answer'] += 1
-        
+
         if check_reasoning_steps(model_output, expected_output):
             results['correct_steps'] += 1
-        
+
         if check_completeness(model_output):
             results['complete_proof'] += 1
-        
+
         results['total'] += 1
-    
+
     # 计算百分比
     total = results['total']
     return {
@@ -380,7 +380,7 @@ evaluation_history = []
 
 for epoch in range(num_epochs):
     # 训练...
-    
+
     # 每 5 个 epoch 评估一次
     if epoch % 5 == 0:
         eval_results = evaluate_model(sampling_client, test_data, tokenizer)
@@ -389,7 +389,7 @@ for epoch in range(num_epochs):
             'accuracy': eval_results['accuracy'],
             'loss': current_loss
         })
-        
+
         print(f"Epoch {epoch} - Test Accuracy: {eval_results['accuracy']:.4f}")
 
 # 保存评估历史
