@@ -50,7 +50,7 @@ def build_config_blueprint() -> chz.Blueprint[train.Config]:
         model_name_for_tokenizer=model_name,
         renderer_name=renderer_name,
         max_length=32768,
-        batch_size=16,
+        batch_size=128,
         train_on_what=TrainOnWhat.ALL_ASSISTANT_MESSAGES,
     )
 
